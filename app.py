@@ -19,7 +19,8 @@ class Present(db.Model):
 
 @app.route("/", methods=["GET"])
 def root_view():
-    return render_template("index.html", presents=Present.query.all())
+    return render_template("index.html", \
+            presents=Present.query.filter_by(taken=False))
 
 @app.route("/", methods=["POST"])
 def root_post():
@@ -47,4 +48,5 @@ def dbinit():
 
 if __name__ == '__main__':
     dbinit()
-    app.run(debug=True, use_reloader=False, host="127.0.0.1")
+    app.run(debug=True, use_reloader=True, host="127.0.0.1")
+
